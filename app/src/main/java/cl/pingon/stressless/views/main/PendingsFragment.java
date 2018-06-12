@@ -1,5 +1,6 @@
-package cl.pingon.stressless;
+package cl.pingon.stressless.views.main;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,12 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import cl.pingon.stressless.R;
+import cl.pingon.stressless.adapters.PendingClickListener;
 import cl.pingon.stressless.adapters.PendingsAdapter;
 import cl.pingon.stressless.models.Pending;
+import cl.pingon.stressless.views.details.DetailsActivity;
 
 public class PendingsFragment extends Fragment implements PendingClickListener {
 
     private PendingsAdapter adapter;
+
+    public static final String PENDING_ID = "cl.pingon.stressless.views.main.KEY.PENDING_ID";
 
     public PendingsFragment() {
     }
@@ -38,13 +44,6 @@ public class PendingsFragment extends Fragment implements PendingClickListener {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        for (int i = 0; i < 20; i++) {
-            Pending pending = new Pending();
-            pending.setName(String.valueOf(i));
-            pending.setDone(false);
-            pending.save();
-        }
-
         adapter = new PendingsAdapter(this);
         recyclerView.setAdapter(adapter);
 
@@ -52,11 +51,14 @@ public class PendingsFragment extends Fragment implements PendingClickListener {
 
     public void updateList(Pending pending) {
         adapter.update(pending);
-        Log.e("PENDING", pending.getName());
+        Log.e("TAG", pending.getName());
     }
 
     @Override
     public void clickedID(long id) {
-        Toast.makeText(getContext(), String.valueOf(id), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getContext(), DetailsActivity.class);
+        intent.putExtra(PENDING_ID, id);
+        startActivity(intent);
+
     }
 }

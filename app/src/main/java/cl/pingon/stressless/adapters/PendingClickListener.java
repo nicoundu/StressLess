@@ -1,4 +1,4 @@
-package cl.pingon.stressless;
+package cl.pingon.stressless.adapters;
 
 public interface PendingClickListener {
 

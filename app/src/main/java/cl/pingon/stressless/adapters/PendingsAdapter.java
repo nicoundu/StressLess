@@ -10,9 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.logging.Handler;
 
-import cl.pingon.stressless.PendingClickListener;
 import cl.pingon.stressless.R;
 import cl.pingon.stressless.data.Queries;
 import cl.pingon.stressless.models.Pending;
@@ -23,6 +21,11 @@ public class PendingsAdapter extends RecyclerView.Adapter<PendingsAdapter.ViewHo
 
     private PendingClickListener listener;
 
+    public PendingsAdapter(PendingClickListener listener) {
+        this.listener = listener;
+    }
+
+
 
     @NonNull
     @Override
@@ -32,9 +35,6 @@ public class PendingsAdapter extends RecyclerView.Adapter<PendingsAdapter.ViewHo
         return viewHolder;
     }
 
-    public PendingsAdapter(PendingClickListener listener) {
-        this.listener = listener;
-    }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {

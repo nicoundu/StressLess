@@ -19,4 +19,10 @@ public class Queries {
 
     }
 
+    public Pending byId (long idpending) {
+        Pending pending;
+        pending = Pending.findById(Pending.class, idpending);
+        return pending;
+    }
+
 }
